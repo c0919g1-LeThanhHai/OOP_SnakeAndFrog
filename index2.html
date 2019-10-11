@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let Snake = function(name, length, weight) {
+        this.name = name;
+        this. getName = function() {
+            return this.name;
+        };
+        this.setName = function(Name) {
+            this.name = Name;
+        };
+
+        this.length = length;
+        this.getLength = function() {
+            return this.length;
+        };
+        this.setLength = function(Length) {
+            this.length = Length;
+        };
+
+        this.weight = weight;
+        this.getWeight = function() {
+            return this.weight;
+        };
+        this.setWeight = function(Weight) {
+            this.weight = Weight;
+        }
+
+        this.catch = function(frog) {
+            if(frog.runAway(this)) {
+                console.log(`${this.getName()} is too bad at sneaking`);
+            } else {
+                console.log(`${this.getName()} is an assasin`);
+                this.eat(frog);
+                frog.setStatus(false);
+            }
+        }
+
+        this.noise = function() {
+            let a = Math.round(Math.random());
+            if(a>0) {
+                return true;
+            }
+            return false;
+        }
+
+        this.eat = function(frog) {
+            if(frog.getStatus()) {
+                if(frog.getPoison()) {
+                    console.log(`Being poisoned!!`);
+                    this.setLength(this.length--);
+                    this.setWeight(this.weight--);
+                } else {
+                    console.log(`Yummy`);
+                    this.setLength(this.length++);
+                    this.setWeight(this.weight + frog.getWeight());
+                }
+            } else {
+                console.log(`Don't eat this`);
+            }
+        }
+    }
+
+    let Frog = function(name, weight, status, poison) {
+        this.name = name;
+        this.getName = function() {
+            return this.name;
+        };
+        this.setName = function(Name) {
+            this.name = Name;
+        };
+
+        this.weight = weight;
+        this.getWeight = function() {
+            return this.weight;
+        };
+        this.setWeight = function(Weight) {
+            this.weight = Weight;
+        };
+
+        this.status = status;
+        this.getStatus = function() {
+            return this.status;
+        };
+        this.setStatus = function(Status) {
+            this.status = Status;
+        }
+
+        this.poison = poison;
+        this.getPoison = function() {
+            return this.poison;
+        };
+        this.setPoison = function(Poison) {
+            this.poison = Poison;
+        }
+
+        this.runAway = function(snake) {
+            if(snake.noise()) {
+                console.log(`${this.getName()} success run away!!`);
+                return true;
+            } else {
+                console.log(`${this.getName()} was being catched!!`);
+                return false;
+            }
+        }
+    }
+
+    let s1 = new Snake("Stupid", 400, 14);
+
+    let f1 = new Frog("Smart", 3, true, false);
+    let f2 = new Frog("Smart2", 5, true, true);
+
+    s1.catch(f1);
+    s1.catch(f2);
+
+</script>
+</body>
+</html>

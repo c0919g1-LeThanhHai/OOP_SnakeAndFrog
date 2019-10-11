@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let Mouse = function(name, weight, speed, status) {
+        this.name = name;
+        this.setName = function(Name) {
+            this.name = Name;
+        };
+        this.getName = function() {
+            return this.name;
+        };
+        this.weight = weight;
+        this.speed = speed;
+        this.status = status;
+        this.screaming = function(str) {
+            if(this.status) {
+                alert(str);
+            }
+        }
+    }
+
+    let mouse1 = new Mouse("Jerry",16,26,true);
+    let mouse2 = new Mouse("Jerry",16,26,true);
+    let mouse3 = new Mouse("Jerry",16,26,true);
+    let mouse4 = new Mouse("Jerry",16,26,true);
+    alert(mouse1.name);
+    mouse1.screaming("chít chít");
+
+    let Cat = function(name, weight, maxspeed) {
+        this.name = name;
+        this.weight = weight;
+        this.maxspeed = maxspeed;
+        this.screaming = function(str) {
+            console.log(str);
+        };
+        this.catch = function(mouse) {
+            let count = 0;
+            if(this.maxspeed > mouse.speed) {
+                count++;
+            }
+            if(count === 1) {
+                console.log(`${this.name} cat catch ${mouse.name} mouse`);
+            } else {
+                console.log(`Too slow`);
+            }
+        }
+        this.eat = function(mouse, str) {
+            if(mouse.status) {
+                console.log(this.screaming(str));
+                this.weight+=mouse.weight;
+                mouse.status = false;
+            } else {
+                console.log(`Cant eat this`);
+            }
+        }
+    }
+
+    let cat1 = new Cat("Tom", 36, 40);
+
+</script>
+</body>
+</html>
